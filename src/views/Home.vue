@@ -1,18 +1,42 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        <AttachmentUploader :user-id="userId" @uploaded="refreshList"/>
+        <AttachmentsPreviewer ref="previewer" :user-id="userId"/>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+    import AttachmentUploader from "../components/AttachmentUploader/AttachmentUploader";
+    import AttachmentsPreviewer from "../components/AttachmentsPreviewer";
 
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: 'Home',
+        props: {
+            inquiry: String,
+        },
+        components: {
+            AttachmentsPreviewer,
+            AttachmentUploader,
+        },
+        data: function () {
+            return {
+                userId: this.inquiry
+            }
+        },
+        methods: {
+            refreshList() {
+                this.$refs.previewer.refresh();
+            }
+        },
+        created() {
+
+        }
+    }
 </script>
+
+<style lang="scss">
+    .home {
+        max-width: 800px;
+        margin: auto;
+    }
+</style>
