@@ -2,18 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify';
-import {AWS_ACCESS_KEY_ID, AWS_SECRET_KEY} from './config';
-import AWS from "aws-sdk";
+import  * as AmplifyModules from 'aws-amplify'
+import { AmplifyPlugin } from 'aws-amplify-vue'
+import { AmplifyService } from './services/amplify.service';
+
+AmplifyService.configure();
+Vue.use(AmplifyPlugin, AmplifyModules);
 
 Vue.config.productionTip = false;
-AWS.config.update({
-  credentials: {
-    accessKeyId: AWS_ACCESS_KEY_ID,
-    secretAccessKey: AWS_SECRET_KEY,
-  },
-  region: 'ap-northeast-1',
-});
-
 
 new Vue({
   router,
