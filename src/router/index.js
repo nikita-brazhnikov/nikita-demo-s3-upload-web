@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
         next()
     }).catch((e) => {
         console.log("Not authenticated")
-        if (to.name !== 'Login') {
+        if (to.name !== 'Login' && to.name !== 'PasswordReset' && to.name !== 'PasswordRefresh' ) {
             console.log("to login")
             next("/login");
         } else {
